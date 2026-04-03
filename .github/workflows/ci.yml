@@ -28,4 +28,4 @@ jobs:
 
     - name: Rodar testes
       run: |
-        pytest testes/testes_financeiro.py
+        python -m pytest testes/testes_financeiro.py
