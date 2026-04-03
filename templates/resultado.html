@@ -10,11 +10,11 @@
 
 <h1>Seu gráfico financeiro</h1>
 
-<img src="{{ url_for('static', filename='../static/grafico.png') }}?v={{ range(1,10000)|random }}">
+<img src="{{ url_for('static', filename='grafico.png') }}">
 <!--Tem que ser assim para a imagem "grafico sobrescrever a outra, pra n precisar ficar apagando toda vez que for rodar o sistema"-->
 <h1>Organização financeira sugerida</h1>
 
-<img src="{{ url_for('static', filename='../static/grafico2.png') }}?v={{ range(1,10000)|random }}">
+<img src="{{ url_for('static', filename='grafico2.png') }}">
 
 {% endif %}
 

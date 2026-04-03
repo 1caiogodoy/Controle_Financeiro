@@ -48,17 +48,18 @@ def resultado():
         investimento = float(request.form['investimento'])
         lazer = float(request.form['lazer'])
         dividas = float(request.form['dividas'])
+        sobra = calcular_sobra(renda, gastos, investimento, lazer, dividas)
 
-        grafico(renda, gastos, investimento, lazer, dividas, sobra=calcular_sobra())
-        grafico2(gastos, investimento, lazer, dividas, sobra=calcular_sobra())
+        grafico(renda, gastos, investimento, lazer, dividas, sobra)
+        grafico2(gastos, investimento, lazer, dividas, sobra)
         
-        sobra = renda - (gastos + investimento + lazer + dividas)
-        if sobra < 0:
-            return render_template("/resultado.html", erro="Seus gastos ultrapassam sua renda")
+        if calcular_sobra(renda, gastos, investimento, lazer, dividas) < 0:
+            return render_template("resultado.html", erro="Seus gastos ultrapassam sua renda")
         
-        return render_template("/resultado.html", grafico=True, grafico2=True)
-    except Exception:
-        return render_template("/resultado.html", grafico=False, grafico2=False, erro="Seus gastos ultrapassam sua renda. Revise seus valores")
+        return render_template("resultado.html", grafico=True, grafico2=True)
+    except Exception as e:
+        print(e)
+        return render_template("resultado.html", erro=str(e))
 
 if __name__ == "__main__":
     app.run(debug=True)
