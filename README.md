@@ -90,3 +90,9 @@ ruff check .
 ## 👨‍💻 Autor
 
 Caio Godoy
+
+## API utilizada
+AwesomeAPI
+
+## Deploy
+LINK_RENDER
