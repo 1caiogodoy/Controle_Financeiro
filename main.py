@@ -1,8 +1,20 @@
 from flask import Flask, request, render_template
 import matplotlib.pyplot as plt
+import requests
 
 
 app = Flask(__name__)
+
+def pegar_cotacao():
+    url = "https://economia.awesomeapi.com.br/json/last/USD-BRL"
+
+    resposta = requests.get(url)
+
+    dado = resposta.json()
+
+    dolar = dado['USDBRL']['bid']
+
+    return round(float(dolar), 2)
 
 def grafico(renda, gastos, investimento, lazer, dividas, sobra):
     """Função para gerar o gráfico de controle financeiro atual"""
@@ -56,7 +68,8 @@ def resultado():
         if calcular_sobra(renda, gastos, investimento, lazer, dividas) < 0:
             return render_template("resultado.html", erro="Seus gastos ultrapassam sua renda")
         
-        return render_template("resultado.html", grafico=True, grafico2=True)
+        cotacao = pegar_cotacao()
+        return render_template("resultado.html", grafico=True, grafico2=True, cotacao=cotacao)
     except Exception as e:
         print(e)
         return render_template("resultado.html", erro=str(e))
